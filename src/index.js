@@ -9,13 +9,19 @@ function getBMI(height, weight, system){
     }
 }
 
-function exchangeClockwise(noStudents, counts){
-        const preRotateOrder = []
-        const postRotateOrder = []
-        for(let i = 0; i < noStudents; i++){
-            preRotateOrder.push(String.fromCharCode(65 + i))
-        }
+function preExchangeOrderGenerator(noStudents){
+    const order = []
+    for(let i = 0; i < noStudents; i++){
+        order.push(String.fromCharCode(65 + i))
+    }
 
+    return order
+}
+
+
+function exchangeClockwise(noStudents, counts){
+        const preRotateOrder = preExchangeOrderGenerator(noStudents)
+        const postRotateOrder = []
 
         for(let i=0; i < noStudents; i++){
             if(preRotateOrder.indexOf(preRotateOrder[i]) + counts >= noStudents){
@@ -30,6 +36,7 @@ function exchangeClockwise(noStudents, counts){
             postClockwise: postRotateOrder
         }
 }
+
 
 export {exchangeClockwise, getBMI}
 
