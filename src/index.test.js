@@ -1,4 +1,4 @@
-import {exchangeClockwise, getBMI} from './index';
+import {exchangeClockwise, getBMI, seatmateSwap} from './index';
 
 
 describe('getBMI', () => {
@@ -41,3 +41,23 @@ describe('exchangeClockwise', () => {
           })
     });
 });
+
+describe('seatmateSwap', () => {
+    it("Swaps student adjacent to each other. If no of students is odd, does a clockwise exchange on the last 3. ", () => {
+        expect(seatmateSwap(9)).toStrictEqual({
+            preSwap:  ['A', 'B', 'C','D', 'E', 'F','G', 'H', 'I'],
+            postSwap: ['B', 'A', 'D','C', 'F', 'E','H', 'I', 'G']
+          })
+    })
+
+    it("Swaps student adjacent to each other. If no of students is odd, does a clockwise exchange on the last 3. ", () => {
+        expect(seatmateSwap(10)).toStrictEqual({
+            preSwap:  ['A', 'B', 'C', 'D','E', 'F', 'G', 'H','I', 'J'],
+            postSwap: ['B', 'A', 'D', 'C','F', 'E', 'H', 'G','J', 'I']
+          })
+    })
+
+    it("Swaps student adjacent to each other. If no of students is odd, does a clockwise exchange on the last 3. ", () => {
+        expect(seatmateSwap(3)).toStrictEqual({ preSwap: [ 'A', 'B', 'C' ], postSwap: [ 'B', 'C', 'A' ] })
+    })
+})
