@@ -41,6 +41,51 @@ function exchangeClockwise(noStudents, counts){
         }
 }
 
+
+function seatmateSwapEven(noStudents, preSwapOrderArr){
+    const postSwapOrder = []
+    
+    if(noStudents%2 === 0){
+        const aSeatmates = []
+        const bSeatmates = []
+        preSwapOrderArr.forEach( student => {
+            if(preSwapOrderArr.indexOf(student) % 2 === 0){
+                aSeatmates.push(student)
+            } else {
+                bSeatmates.push(student)
+            }
+        })
+        for(let i=0; i < noStudents; i++){
+            if(i%2===0){
+                postSwapOrder.push(bSeatmates.shift())
+            } else {
+                postSwapOrder.push(aSeatmates.shift())
+            }
+        }
+    }
+
+    return postSwapOrder
+}
+
+function seatmateSwap(noStudents){
+    const preSwapOrder = preExchangeOrderGenerator(noStudents)
+    if(noStudents%2 === 0){
+        return {
+            preSwap: preSwapOrder,
+            postSwap: seatmateSwapEven(noStudents, preSwapOrder)
+        }
+
+    } else {
+        const pairedStudents = preSwapOrder.slice(0, noStudents-3)
+        const pairedStudentsSwapped = seatmateSwapEven(pairedStudents.length, pairedStudents)
+        const oddStudents = exchangeClockwiseFromArr(3, 2, preSwapOrder.slice(noStudents-3, Infinity))
+        return {
+            preSwap: preSwapOrder,
+            postSwap: pairedStudentsSwapped.concat(oddStudents)
+        }
+    }
+}
+
 export {exchangeClockwise, getBMI, seatmateSwap}
 
 
