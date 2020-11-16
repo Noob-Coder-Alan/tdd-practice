@@ -18,27 +18,75 @@ function preExchangeOrderGenerator(noStudents){
     return order
 }
 
+function exchangeClockwiseFromArr(noStudents, counts, preRotateOrderArr){
+    const postRotateOrder = []
+
+    for(let i=0; i < noStudents; i++){
+        if(preRotateOrderArr.indexOf(preRotateOrderArr[i]) + counts >= noStudents){
+            postRotateOrder[(preRotateOrderArr.indexOf(preRotateOrderArr[i]) + counts)%noStudents] = preRotateOrderArr[i]
+        } else {
+            postRotateOrder[preRotateOrderArr.indexOf(preRotateOrderArr[i]) + counts] = preRotateOrderArr[i]
+        }
+    }
+
+    return postRotateOrder
+}
+
 
 function exchangeClockwise(noStudents, counts){
         const preRotateOrder = preExchangeOrderGenerator(noStudents)
-        const postRotateOrder = []
-
-        for(let i=0; i < noStudents; i++){
-            if(preRotateOrder.indexOf(preRotateOrder[i]) + counts >= noStudents){
-                postRotateOrder[(preRotateOrder.indexOf(preRotateOrder[i]) + counts)%noStudents] = preRotateOrder[i]
-            } else {
-                postRotateOrder[preRotateOrder.indexOf(preRotateOrder[i]) + counts] = preRotateOrder[i]
-            }
-        }
-
         return {
             preClockwise: preRotateOrder,
-            postClockwise: postRotateOrder
+            postClockwise: exchangeClockwiseFromArr(noStudents, counts, preRotateOrder)
         }
 }
 
 
+// function seatmateSwapEven(noStudents, preSwapOrderArr){
+//     const postSwapOrder = []
+    
+//     if(noStudents%2 === 0){
+//         const aSeatmates = []
+//         const bSeatmates = []
+//         preSwapOrderArr.forEach( student => {
+//             if(preSwapOrderArr.indexOf(student) % 2 === 0){
+//                 aSeatmates.push(student)
+//             } else {
+//                 bSeatmates.push(student)
+//             }
+//         })
+//         for(let i=0; i < noStudents; i++){
+//             if(i%2===0){
+//                 postSwapOrder.push(bSeatmates.shift())
+//             } else {
+//                 postSwapOrder.push(aSeatmates.shift())
+//             }
+//         }
+//     }
+
+//     return postSwapOrder
+// }
+
+// function seatmateSwap(noStudents){
+//     const preSwapOrder = preExchangeOrderGenerator(noStudents)
+//     if(noStudents%2 === 0){
+//         return {
+//             preSwap: preSwapOrder,
+//             postSwap: seatmateSwapEven(noStudents, preSwapOrder)
+//         }
+
+//     } else {
+//         const pairedStudents = preSwapOrder.slice(0, noStudents-3)
+//         const pairedStudentsSwapped = seatmateSwapEven(pairedStudents.length, pairedStudents)
+//         const oddStudents = exchangeClockwiseFromArr(3, 2, preSwapOrder.slice(noStudents-3, Infinity))
+//         return {
+//             preSwap: preSwapOrder,
+//             postSwap: pairedStudentsSwapped.concat(oddStudents)
+//         }
+//     }
+// }
+
+// console.log(seatmateSwap(11))
 export {exchangeClockwise, getBMI}
 
-console.log(exchangeClockwise(6,4))
 
