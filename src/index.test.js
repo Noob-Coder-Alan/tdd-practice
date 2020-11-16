@@ -1,4 +1,5 @@
-import getBMI from './index'
+import {exchangeClockwise, getBMI} from './index';
+
 
 describe('getBMI', () => {
     it('It gets the BMI using units in metric', () => {
@@ -9,5 +10,21 @@ describe('getBMI', () => {
 describe('getBMI', () => {
     it('It gets the BMI using units in english', () => {
         expect(getBMI("5'7", 130,"english")).toBe(20.4)
+    });
+});
+
+describe('exchangeClockwise', () => {
+    it('(Odd no of students) Gets the recommended order of exchanging papers in clockwise.', () => {
+        expect(exchangeClockwise(5,3)).toStrictEqual({
+            preClockwise: [ 'A', 'B', 'C', 'D', 'E' ],
+            postClockwise: [ 'C', 'D', 'E', 'A', 'B' ]
+          })
+    });
+
+    it('(Even no of students) Gets the recommended order of exchanging papers in clockwise.', () => {
+        expect(exchangeClockwise(6,3)).toStrictEqual({
+            preClockwise: [ 'A', 'B', 'C', 'D', 'E', 'F' ],
+            postClockwise: [ 'D', 'E', 'F', 'A', 'B', 'C' ]
+          })
     });
 });
