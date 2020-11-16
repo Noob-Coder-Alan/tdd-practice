@@ -33,6 +33,5 @@ function exchangeClockwise(noStudents, counts){
 
 export {exchangeClockwise, getBMI}
 
-console.log(getBMI("5'7", 130, "english"))
-
+console.log(exchangeClockwise(6,4))
 

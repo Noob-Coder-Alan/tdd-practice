@@ -21,10 +21,24 @@ describe('exchangeClockwise', () => {
           })
     });
 
+    it('(Odd no of students) Gets the recommended order of exchanging papers in clockwise.', () => {
+        expect(exchangeClockwise(5,4)).toStrictEqual({
+            preClockwise: [ 'A', 'B', 'C', 'D', 'E' ],
+            postClockwise: [ 'B', 'C', 'D', 'E', 'A' ]
+          })
+    });
+
     it('(Even no of students) Gets the recommended order of exchanging papers in clockwise.', () => {
         expect(exchangeClockwise(6,3)).toStrictEqual({
             preClockwise: [ 'A', 'B', 'C', 'D', 'E', 'F' ],
             postClockwise: [ 'D', 'E', 'F', 'A', 'B', 'C' ]
+          })
+    });
+
+    it('(Even no of students) Gets the recommended order of exchanging papers in clockwise.', () => {
+        expect(exchangeClockwise(6,4)).toStrictEqual({
+            preClockwise: [ 'A', 'B', 'C', 'D', 'E', 'F' ],
+            postClockwise: [ 'C', 'D', 'E', 'F', 'A', 'B' ]
           })
     });
 });
